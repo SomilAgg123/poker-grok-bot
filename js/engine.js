@@ -150,16 +150,16 @@
     return g;
   }
   // Echo bonus: if your Tell card matches the rank of a flop card, every other live player
-  // pays you an "echo" of 1 big blind into your stack (proud reveal is rewarded, info is costed).
+  // pays you half a big blind. But echoes collide: if two or more players echo, nobody is paid.
+  // (Balance pass: the original "everyone can echo" version fired on ~40% of Tells and was a flat tax.)
   function applyTellBonus(g) {
     if (!g.tellBonus) return;
-    live(g).forEach(p => {
-      const c = p.hole[p.tell];
-      if (g.board.some(b => b.r === c.r)) {
-        let got = 0;
-        live(g).forEach(q => { if (q !== p) { const a = Math.min(g.bb / 2, q.stack); q.stack -= a; got += a; if (q.stack === 0 && !q.allIn) q.allIn = true; } });
-        p.stack += got; if (got > 0) { p.allIn = false; log(g, `Echo! ${p.name}'s Tell pairs the flop: collects ${got}.`); }
-      }
+    const echoers = live(g).filter(p => g.board.some(b => b.r === p.hole[p.tell].r));
+    if (echoers.length > 1) { log(g, `Echoes collide (${echoers.map(p => p.name).join(' & ')}) — no bonus.`); return; }
+    echoers.forEach(p => {
+      let got = 0;
+      live(g).forEach(q => { if (q !== p) { const a = Math.min(Math.floor(g.bb / 2), q.stack); q.stack -= a; got += a; if (q.stack === 0) q.allIn = true; } });
+      p.stack += got; if (got > 0) { p.allIn = false; log(g, `Echo! ${p.name}'s Tell pairs the flop: collects ${got}.`); }
     });
   }
   function pendingTells(g) { return live(g).filter(p => p.tell < 0).map(p => p.id); }

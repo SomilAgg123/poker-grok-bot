@@ -80,7 +80,7 @@
       // value of keeping others hidden: how much they contribute to our hand
       let v = 0;
       const pairsBoard = g.board.some(b => b.r === c.r);
-      if (pairsBoard) v += 2.5; // echo bonus
+      if (pairsBoard) v += 1.5; // echo bonus (discounted: echoes can collide)
       // penalise revealing cards that pair with our other hole cards (hides our trips/pairs)
       if (others.some(o => o.r === c.r)) v -= 1.5;
       // suited with board flush draw: revealing it advertises the draw

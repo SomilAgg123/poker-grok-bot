@@ -31,8 +31,24 @@ for (let t = 0; t < 300; t++) { const d = TH.shuffle(TH.makeDeck()); const h = d
   ok(pots[0].amount === 350 && pots[0].elig.length === 3, 'main pot ' + JSON.stringify(pots));
   ok(pots[1].amount === 400 && pots[1].elig.length === 2, 'side pot');
 }
+// Echo rules
+{
+  const g = TH.newGame({ rnd: Math.random }); TH.startHand(g);
+  g.players.forEach(p => { p.folded = false; }); g.street = 1; g.board = H('Ks 7d 2c'); g.phase = 'tell'; g.tellDone = false;
+  g.players[0].hole = H('Kh 3d 4d'); g.players[1].hole = H('9h 3c 4c'); g.players[2].hole = H('Th 5c 6c'); g.players[3].hole = H('Jh 5d 6d');
+  const before = g.players.map(p => p.stack);
+  [0,1,2,3].forEach(i => TH.setTell(g, i, 0));
+  ok(g.players[0].stack - before[0] === 30 && g.players[1].stack - before[1] === -10, 'single echo pays half BB each');
+  const g2 = TH.newGame({ rnd: Math.random }); TH.startHand(g2);
+  g2.street = 1; g2.board = H('Ks 7d 2c'); g2.phase = 'tell'; g2.tellDone = false;
+  g2.players[0].hole = H('Kh 3d 4d'); g2.players[1].hole = H('7h 3c 4c'); g2.players[2].hole = H('Th 5c 6c'); g2.players[3].hole = H('Jh 5d 6d');
+  const b2 = g2.players.map(p => p.stack); [0,1,2,3].forEach(i => TH.setTell(g2, i, 0));
+  ok(g2.players.every((p, i) => p.stack === b2[i]), 'colliding echoes pay nothing');
+  ok(g2.street === 2 && g2.board.length === 4, 'turn dealt after tells');
+}
 // full simulated games with AI for all seats: chip conservation & termination
 let seed = 1; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+const winsBy = {};
 let hands = 0, tells = 0, echoes = 0, showdowns = 0;
 for (let gnum = 0; gnum < 12; gnum++) {
   const g = TH.newGame({ rnd }); g.aiSims = 30;
@@ -54,7 +70,9 @@ for (let gnum = 0; gnum < 12; gnum++) {
     if (g.phase === 'gameover') break;
     // for sim, human seat being out ends game; fine
   }
+  { const top = g.players.slice().sort((a, b) => b.stack - a.stack)[0].name; winsBy[top] = (winsBy[top] || 0) + 1; }
   echoes += g.log.filter(l => l.startsWith('Echo')).length;
 }
+console.log('chip leader at end of each sim game:', JSON.stringify(winsBy));
 console.log(`sim: ${hands} hands, ${showdowns} showdowns, ${tells} tells, ${echoes} echoes`);
 console.log(`${pass} passed, ${fail} failed`); process.exit(fail ? 1 : 0);

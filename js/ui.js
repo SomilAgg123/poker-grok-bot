@@ -4,7 +4,8 @@
   const $ = id => document.getElementById(id);
   const SUIT = { s: '♠', h: '♥', d: '♦', c: '♣' };
   const RK = r => '23456789TJQKA'[r - 2].replace('T', '10');
-  let g, timer = null, logShown = 0, seen = new Set();
+  let g, timer = null, logShown = 0, seen = new Set(), showOdds = true, oddsKey = '', oddsVal = 0;
+  try { showOdds = localStorage.getItem('th_odds') !== '0'; } catch (e) {}
   const BOT_DELAY = 750;
 
   function cardEl(c, opts = {}) {
@@ -44,6 +45,11 @@
       el.appendChild(cs);
       const hn = document.createElement('div'); hn.className = 'handname';
       if (hb) hn.textContent = hb.name; else if (p.isHuman && p.hole.length && !p.folded && g.board.length) hn.textContent = TH.bestHand(p.hole.concat(g.board)).name;
+      if (p.isHuman && showOdds && !p.folded && !sd && p.hole.length && TH.live(g).length > 1) {
+        const k = g.handNo + ':' + g.board.length + ':' + g.players.map(q => q.tell + (q.folded ? 'f' : '')).join();
+        if (oddsKey !== k) { oddsKey = k; oddsVal = THAI.equity(g, 0, 400); }
+        hn.textContent += ` · win ≈ ${Math.round(oddsVal * 100)}%`;
+      }
       el.appendChild(hn);
       const bc = document.createElement('div'); bc.className = 'betchip'; bc.textContent = p.bet ? p.bet : ''; el.appendChild(bc);
     });
@@ -114,6 +120,18 @@
   }
   function nextHand() { seen = new Set(); TH.startHand(g); fast = false; render(); schedule(); }
   function newGame() { clearTimeout(timer); g = TH.newGame(); logShown = 0; $('log').innerHTML = ''; nextHand(); }
+  $('oddsBtn').onclick = () => { showOdds = !showOdds; try { localStorage.setItem('th_odds', showOdds ? '1' : '0'); } catch (e) {} oddsLabel(); render(); };
+  function oddsLabel() { $('oddsBtn').textContent = 'Odds: ' + (showOdds ? 'on' : 'off'); }
+  oddsLabel();
+  // Keyboard: F fold, C check/call, R raise (slider value), N next hand, 1-3 pick Tell card
+  document.addEventListener('keydown', ev => {
+    if (ev.target.tagName === 'INPUT' && ev.key !== 'Enter') { if (!/^[fcrn123]$/i.test(ev.key)) return; }
+    const k = ev.key.toLowerCase();
+    if (g.phase === 'tell' && /^[123]$/.test(k)) { const e = document.querySelectorAll('#seat0 .card.pick')[+k - 1]; if (e) e.click(); return; }
+    const find = t => [...document.querySelectorAll('#controls button')].find(b => b.textContent.startsWith(t));
+    const map = { f: ['Fold'], c: ['Check', 'Call'], r: ['Raise', 'Bet', 'All-in'], n: ['Next hand', 'Play again', 'Skip'] }[k];
+    if (!map) return; for (const t of map) { const b = find(t); if (b) { b.click(); return; } }
+  });
   $('newBtn').onclick = () => { if (confirm('Start a new game?')) newGame(); };
   $('rulesBtn').onclick = () => $('rules').classList.remove('hidden');
   $('closeRules').onclick = () => { $('rules').classList.add('hidden'); try { localStorage.setItem('th_seen', 1); } catch (e) {} };
