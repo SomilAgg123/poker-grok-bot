@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tell Hold'em — poker where everyone must show a card</title>
+<link rel="stylesheet" href="css/style.css"></head>
+<body>
+<header><h1>Tell <span>Hold'em</span></h1><div class="hdr"><span id="blinds"></span><button id="rulesBtn">Rules</button><button id="newBtn">New game</button></div></header>
+<main id="table">
+  <div class="felt">
+    <div id="seat1" class="seat top"></div>
+    <div id="seat2" class="seat right"></div>
+    <div id="seat3" class="seat left"></div>
+    <div class="center"><div id="street"></div><div id="board" class="cards"></div><div id="pot"></div><div id="banner"></div></div>
+    <div id="seat0" class="seat bottom"></div>
+  </div>
+  <div id="controls"></div>
+  <aside id="log"></aside>
+</main>
+<div id="rules" class="modal"><div class="box">
+<h2>How to play Tell Hold'em</h2>
+<p>Texas Hold'em, with one twist that changes everything: <b>the Tell</b>.</p>
+<ol>
+<li>You get <b>three</b> hole cards instead of two. Make your best 5-card hand from your 3 hole cards + 5 board cards.</li>
+<li>Betting is No-Limit: pre-flop, flop, turn, river, with blinds (they double every 8 hands).</li>
+<li><b>The Tell:</b> after the flop betting, everyone still in must flip <b>one</b> hole card face up for the rest of the hand. You choose which. It still plays in your hand.</li>
+<li><b>Echo:</b> if the card you flip matches the rank of a flop card, every other player still in pays you half a big blind. Showing strength gets paid — but it tells everyone you've got that pair.</li>
+<li>Bots read Tells: their equity math uses every revealed card. Hide your key card, show a decoy, or flaunt an ace to sell a bluff.</li>
+<li>Last player with chips wins. You're out when you bust.</li>
+</ol>
+<p class="small">Hand ranks (high→low): Straight Flush, Four of a Kind, Full House, Flush, Straight, Three of a Kind, Two Pair, Pair, High Card. A-2-3-4-5 is the lowest straight.</p>
+<button id="closeRules">Let's play</button></div></div>
+<script src="js/engine.js"></script><script src="js/ai.js"></script><script src="js/ui.js"></script>
+</body></html>

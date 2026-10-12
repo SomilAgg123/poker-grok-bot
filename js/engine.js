@@ -60,7 +60,10 @@
   }
   function live(g) { return g.players.filter(p => !p.folded && !p.out); }
   function nextSeat(g, i, pred) { for (let k = 1; k <= g.players.length; k++) { const j = (i + k) % g.players.length; if (pred(g.players[j])) return j; } return -1; }
-  function log(g, m) { g.log.push(m); }
+  function log(g, m) {
+    m = m.replace(/^You (folds|checks|calls|bets|raises|shows|wins|is)/, (_, v) => 'You ' + ({ folds: 'fold', checks: 'check', calls: 'call', bets: 'bet', raises: 'raise', shows: 'show', wins: 'win', is: 'are' })[v]);
+    g.log.push(m);
+  }
 
   function startHand(g) {
     const seated = g.players.filter(p => !p.out);
