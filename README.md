@@ -34,17 +34,7 @@
 
 ## 🔄 How a hand flows
 
-```mermaid
-flowchart LR
-    A["🂠 Deal<br/>3 hole cards each"] --> B["💰 Pre-flop<br/>betting"]
-    B --> C["🃏 Flop<br/>+ betting"]
-    C --> D{"👁️ THE TELL<br/>everyone flips 1 card"}
-    D -->|"Tell matches a flop rank<br/>(only one player)"| E["🔔 Echo!<br/>+½ BB from each rival"]
-    D -->|"2+ echoes collide<br/>or no match"| F["Turn<br/>+ betting"]
-    E --> F
-    F --> G["River<br/>+ betting"]
-    G --> H["🏆 Showdown<br/>best 5 of 8 cards"]
-```
+<p align="center"><img src="docs/flow.svg" alt="Hand flow: deal 3, pre-flop, flop, the Tell, Echo, turn, river, showdown" width="100%"></p>
 
 ## 📜 Rules
 
@@ -101,7 +91,7 @@ Every bot runs **Monte Carlo equity rollouts that use the cards opponents have r
 1. **Engine + AI**: hand evaluator (best 5 of *n*, A-2-3-4-5 wheel, kickers), No-Limit state machine with the Tell phase, side pots, persona bots. 300+ simulated hands with chips conserved on every hand.
 2. **UI**: felt table, deal animations, bet slider with ½-pot / pot / max presets, action log, rules modal. Fixed cards re-animating invisibly on every render, and "You calls" grammar.
 3. **Iteration pass**: Echo collision rule for balance, live win-odds meter, keyboard shortcuts, bots discount Echo value, collision unit tests.
-4. **README redesign**: SVG banner, flow diagram, bot roster.
+4. **README redesign**: SVG banner, hand-flow SVG, bot roster.
 </details>
 
 ## 🧪 Tests

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="200" viewBox="0 0 1200 200">
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#8a9bb0"/></marker></defs>
+<rect width="1200" height="200" rx="16" fill="#111a24"/>
+<rect x="20.0" y="40" width="128" height="84" rx="12" fill="#28426b" stroke="#ffffff55" stroke-width="2"/>
+<text x="84.0" y="76" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#fff" text-anchor="middle">DEAL</text>
+<text x="84.0" y="100" font-family="Arial,sans-serif" font-size="12.5" fill="#fff" text-anchor="middle">3 hole cards</text>
+<line x1="151.0" y1="82" x2="162.42857142857142" y2="82" stroke="#8a9bb0" stroke-width="3" marker-end="url(#a)"/>
+<rect x="167.42857142857142" y="40" width="128" height="84" rx="12" fill="#1f7a4c" stroke="#ffffff55" stroke-width="2"/>
+<text x="231.42857142857142" y="76" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#fff" text-anchor="middle">PRE-FLOP</text>
+<text x="231.42857142857142" y="100" font-family="Arial,sans-serif" font-size="12.5" fill="#fff" text-anchor="middle">betting</text>
+<line x1="298.42857142857144" y1="82" x2="309.8571428571429" y2="82" stroke="#8a9bb0" stroke-width="3" marker-end="url(#a)"/>
+<rect x="314.85714285714283" y="40" width="128" height="84" rx="12" fill="#1f7a4c" stroke="#ffffff55" stroke-width="2"/>
+<text x="378.85714285714283" y="76" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#fff" text-anchor="middle">FLOP</text>
+<text x="378.85714285714283" y="100" font-family="Arial,sans-serif" font-size="12.5" fill="#fff" text-anchor="middle">3 cards + bet</text>
+<line x1="445.85714285714283" y1="82" x2="457.2857142857143" y2="82" stroke="#8a9bb0" stroke-width="3" marker-end="url(#a)"/>
+<rect x="462.2857142857142" y="40" width="128" height="84" rx="12" fill="#d9a62a" stroke="#ffffff55" stroke-width="2"/>
+<text x="526.2857142857142" y="76" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#1a1300" text-anchor="middle">THE TELL</text>
+<text x="526.2857142857142" y="100" font-family="Arial,sans-serif" font-size="12.5" fill="#1a1300" text-anchor="middle">everyone flips 1</text>
+<line x1="593.2857142857142" y1="82" x2="604.7142857142857" y2="82" stroke="#8a9bb0" stroke-width="3" marker-end="url(#a)"/>
+<rect x="609.7142857142857" y="40" width="128" height="84" rx="12" fill="#c33" stroke="#ffffff55" stroke-width="2"/>
+<text x="673.7142857142857" y="76" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#fff" text-anchor="middle">ECHO?</text>
+<text x="673.7142857142857" y="100" font-family="Arial,sans-serif" font-size="12.5" fill="#fff" text-anchor="middle">match a flop rank</text>
+<line x1="740.7142857142857" y1="82" x2="752.1428571428571" y2="82" stroke="#8a9bb0" stroke-width="3" marker-end="url(#a)"/>
+<rect x="757.1428571428571" y="40" width="128" height="84" rx="12" fill="#1f7a4c" stroke="#ffffff55" stroke-width="2"/>
+<text x="821.1428571428571" y="76" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#fff" text-anchor="middle">TURN</text>
+<text x="821.1428571428571" y="100" font-family="Arial,sans-serif" font-size="12.5" fill="#fff" text-anchor="middle">+ betting</text>
+<line x1="888.1428571428571" y1="82" x2="899.5714285714286" y2="82" stroke="#8a9bb0" stroke-width="3" marker-end="url(#a)"/>
+<rect x="904.5714285714284" y="40" width="128" height="84" rx="12" fill="#1f7a4c" stroke="#ffffff55" stroke-width="2"/>
+<text x="968.5714285714284" y="76" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#fff" text-anchor="middle">RIVER</text>
+<text x="968.5714285714284" y="100" font-family="Arial,sans-serif" font-size="12.5" fill="#fff" text-anchor="middle">+ betting</text>
+<line x1="1035.5714285714284" y1="82" x2="1046.9999999999998" y2="82" stroke="#8a9bb0" stroke-width="3" marker-end="url(#a)"/>
+<rect x="1052.0" y="40" width="128" height="84" rx="12" fill="#6b3fa0" stroke="#ffffff55" stroke-width="2"/>
+<text x="1116.0" y="76" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#fff" text-anchor="middle">SHOWDOWN</text>
+<text x="1116.0" y="100" font-family="Arial,sans-serif" font-size="12.5" fill="#fff" text-anchor="middle">best 5 of 8</text>
+<text x="600" y="168" font-family="Arial,sans-serif" font-size="14" fill="#c9d4e0" text-anchor="middle">Echo: a lone Tell that pairs the flop collects ½ big blind from every rival. Two or more echoes collide and pay nothing.</text></svg>
